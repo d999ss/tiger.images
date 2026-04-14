@@ -9,25 +9,24 @@ interface Product {
   navName: string
   heroImage: string
   division: Division
-  status: string
   fileSize: number
 }
 
 const PRODUCTS: Product[] = [
-  { slug: "caregraft", title: "caregraFT\u2122", navName: "caregraFT\u2122", heroImage: "/images/tiger-assets/caregraft.png", division: "wound", status: "In Review", fileSize: 84052 },
-  { slug: "carepatch", title: "carePATCH\u00AE", navName: "carePATCH\u00AE", heroImage: "/images/tiger-assets/carepatch.png", division: "wound", status: "In Review", fileSize: 249599 },
-  { slug: "carepac", title: "carePAC\u2122", navName: "carePAC\u2122", heroImage: "/images/tiger-assets/carepac-logo.png", division: "wound", status: "In Review", fileSize: 52778 },
-  { slug: "completeft", title: "completeFT\u00AE", navName: "completeFT\u00AE", heroImage: "/images/tiger-assets/completeft.png", division: "wound", status: "In Review", fileSize: 43759 },
-  { slug: "healpack", title: "HealPACK\u2122", navName: "HealPACK\u2122", heroImage: "/images/tiger-assets/healpack.png", division: "wound", status: "In Review", fileSize: 56602 },
-  { slug: "alloclae", title: "alloClae\u2122", navName: "alloClae\u2122", heroImage: "/images/tiger-assets/alloclae.png", division: "aesthetics", status: "Approved", fileSize: 64123 },
-  { slug: "amplifine", title: "Amplifine\u00AE", navName: "Amplifine\u00AE", heroImage: "/images/tiger-assets/amplifine.png", division: "aesthetics", status: "Approved", fileSize: 57014 },
-  { slug: "aveli", title: "Av\u00E9li\u00AE", navName: "Av\u00E9li\u00AE", heroImage: "/images/tiger-assets/aveli.png", division: "aesthetics", status: "Approved", fileSize: 66551 },
-  { slug: "bellafill", title: "Bellafill\u00AE", navName: "Bellafill\u00AE", heroImage: "/images/tiger-assets/bellafill-logo.png", division: "aesthetics", status: "Approved", fileSize: 47146 },
-  { slug: "expanders", title: "Breast Tissue Expanders", navName: "Breast Tissue Expanders", heroImage: "/images/tiger-assets/expanders.png", division: "aesthetics", status: "Approved", fileSize: 67795 },
-  { slug: "sientra", title: "Sientra\u00AE", navName: "Sientra\u00AE", heroImage: "/images/tiger-assets/sientra.png", division: "aesthetics", status: "Approved", fileSize: 1166397 },
-  { slug: "viality", title: "Viality\u00AE", navName: "Viality\u00AE", heroImage: "/images/tiger-assets/viality.png", division: "aesthetics", status: "Approved", fileSize: 57896 },
-  { slug: "implant-delivery", title: "Tiger Guard\u2122", navName: "Tiger Guard\u2122", heroImage: "/images/tiger-assets/tigerguard.png", division: "aesthetics", status: "", fileSize: 47303 },
-  { slug: "retractor", title: "Tiger View\u2122", navName: "Tiger View\u2122", heroImage: "/images/figma/prod-generic-box-aesthetics.png", division: "aesthetics", status: "", fileSize: 264510 },
+  { slug: "caregraft", title: "caregraFT\u2122", navName: "caregraFT\u2122", heroImage: "/images/tiger-assets/caregraft.png", division: "wound", fileSize: 84052 },
+  { slug: "carepatch", title: "carePATCH\u00AE", navName: "carePATCH\u00AE", heroImage: "/images/tiger-assets/carepatch.png", division: "wound", fileSize: 249599 },
+  { slug: "carepac", title: "carePAC\u2122", navName: "carePAC\u2122", heroImage: "/images/tiger-assets/carepac-logo.png", division: "wound", fileSize: 52778 },
+  { slug: "completeft", title: "completeFT\u00AE", navName: "completeFT\u00AE", heroImage: "/images/tiger-assets/completeft.png", division: "wound", fileSize: 43759 },
+  { slug: "healpack", title: "HealPACK\u2122", navName: "HealPACK\u2122", heroImage: "/images/tiger-assets/healpack.png", division: "wound", fileSize: 56602 },
+  { slug: "alloclae", title: "alloClae\u2122", navName: "alloClae\u2122", heroImage: "/images/tiger-assets/alloclae.png", division: "aesthetics", fileSize: 64123 },
+  { slug: "amplifine", title: "Amplifine\u00AE", navName: "Amplifine\u00AE", heroImage: "/images/tiger-assets/amplifine.png", division: "aesthetics", fileSize: 57014 },
+  { slug: "aveli", title: "Av\u00E9li\u00AE", navName: "Av\u00E9li\u00AE", heroImage: "/images/tiger-assets/aveli.png", division: "aesthetics", fileSize: 66551 },
+  { slug: "bellafill", title: "Bellafill\u00AE", navName: "Bellafill\u00AE", heroImage: "/images/tiger-assets/bellafill-logo.png", division: "aesthetics", fileSize: 47146 },
+  { slug: "expanders", title: "Breast Tissue Expanders", navName: "Breast Tissue Expanders", heroImage: "/images/tiger-assets/expanders.png", division: "aesthetics", fileSize: 67795 },
+  { slug: "sientra", title: "Sientra\u00AE", navName: "Sientra\u00AE", heroImage: "/images/tiger-assets/sientra.png", division: "aesthetics", fileSize: 56213 },
+  { slug: "viality", title: "Viality\u00AE", navName: "Viality\u00AE", heroImage: "/images/tiger-assets/viality.png", division: "aesthetics", fileSize: 57896 },
+  { slug: "implant-delivery", title: "Tiger Guard\u2122", navName: "Tiger Guard\u2122", heroImage: "/images/tiger-assets/tigerguard.png", division: "aesthetics", fileSize: 47303 },
+  { slug: "retractor", title: "Tiger View\u2122", navName: "Tiger View\u2122", heroImage: "/images/figma/prod-generic-box-aesthetics.png", division: "aesthetics", fileSize: 264510 },
 ]
 
 const DIVISIONS: { key: Division; label: string; color: string; slugs: string[] }[] = [
@@ -54,17 +53,6 @@ function classifyImage(heroImage: string): ImageStatus {
 function formatSize(bytes: number): string {
   const kb = Math.round(bytes / 1024)
   return kb > 1024 ? `${(kb / 1024).toFixed(1)} MB` : `${kb} KB`
-}
-
-function statusLabel(s: string) {
-  return s || "No Status"
-}
-
-const STATUS_STYLES: Record<string, string> = {
-  Approved: "bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/20",
-  "In Review": "bg-[#D2A62C]/10 text-[#a88523] border-[#D2A62C]/20",
-  "Need Content": "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/20",
-  "No Status": "bg-[#231010]/5 text-[#231010]/40 border-[#231010]/10",
 }
 
 const IMAGE_STATUS_STYLES: Record<ImageStatus, { label: string; color: string }> = {
@@ -147,8 +135,6 @@ export default function ImageAuditPage() {
                 {divProducts.map(p => {
                   const imgStatus = classifyImage(p.heroImage)
                   const imgStyle = IMAGE_STATUS_STYLES[imgStatus]
-                  const cStatus = statusLabel(p.status)
-                  const cStyle = STATUS_STYLES[cStatus] || STATUS_STYLES["No Status"]
 
                   return (
                     <div
@@ -182,9 +168,6 @@ export default function ImageAuditPage() {
                         <div className="flex flex-wrap items-center gap-2 shrink-0">
                           <span className={`inline-flex items-center px-2.5 py-0.5 text-[9px] uppercase tracking-[1.5px] font-light rounded-full border ${imgStyle.color}`}>
                             {imgStyle.label}
-                          </span>
-                          <span className={`inline-flex items-center px-2.5 py-0.5 text-[9px] uppercase tracking-[1.5px] font-light rounded-full border ${cStyle}`}>
-                            {cStatus}
                           </span>
                         </div>
                       </div>
@@ -223,7 +206,7 @@ export default function ImageAuditPage() {
 
         {/* Footer */}
         <div className="mt-10 text-center text-[11px] font-light" style={{ color: "rgba(35,16,16,0.15)" }}>
-          Internal use only — Tiger BioSciences Product Image Audit — {total} nav products
+          Internal use only \u2014 Tiger BioSciences Product Image Audit \u2014 {total} nav products
         </div>
       </div>
     </div>
