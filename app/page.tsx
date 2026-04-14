@@ -60,7 +60,7 @@ function formatSize(bytes: number): string {
 
 const IMAGE_STATUS_STYLES: Record<ImageStatus, { label: string; color: string }> = {
   real: { label: "Brand Logo", color: "bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/25" },
-  "needs-review": { label: "Needs Review", color: "bg-[#D2A62C]/10 text-[#a88523] border-[#D2A62C]/25" },
+  "needs-review": { label: "No Logo Found", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
   placeholder: { label: "No Logo Found", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
   missing: { label: "No Image", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
 }
