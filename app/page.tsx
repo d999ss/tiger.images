@@ -44,12 +44,12 @@ const DIVISIONS: { key: Division; label: string; color: string; slugs: string[] 
   },
 ]
 
-const NEEDS_REVIEW_SLUGS = ["expanders"]
+const NEEDS_REVIEW_SLUGS = ["expanders", "retractor"]
 
 function classifyImage(heroImage: string, slug?: string): ImageStatus {
   if (!heroImage) return "missing"
-  if (heroImage.includes("prod-generic-box")) return "placeholder"
   if (slug && NEEDS_REVIEW_SLUGS.includes(slug)) return "needs-review"
+  if (heroImage.includes("prod-generic-box")) return "needs-review"
   return "real"
 }
 
