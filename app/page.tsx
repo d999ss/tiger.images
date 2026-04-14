@@ -14,7 +14,7 @@ interface Product {
 
 const PRODUCTS: Product[] = [
   { slug: "caregraft", title: "caregraFT\u2122", navName: "caregraFT\u2122", heroImage: "/images/tiger-assets/caregraft.png", division: "wound", fileSize: 84052 },
-  { slug: "carepatch", title: "carePATCH\u00AE", navName: "carePATCH\u00AE", heroImage: "/images/tiger-assets/carepatch.png", division: "wound", fileSize: 249599 },
+  { slug: "carepatch", title: "carePATCH\u00AE", navName: "carePATCH\u00AE", heroImage: "/images/tiger-assets/carepatch.png", division: "wound", fileSize: 41669 },
   { slug: "carepac", title: "carePAC\u2122", navName: "carePAC\u2122", heroImage: "/images/tiger-assets/carepac-logo.png", division: "wound", fileSize: 52778 },
   { slug: "completeft", title: "completeFT\u00AE", navName: "completeFT\u00AE", heroImage: "/images/tiger-assets/completeft.png", division: "wound", fileSize: 43759 },
   { slug: "healpack", title: "HealPACK\u2122", navName: "HealPACK\u2122", heroImage: "/images/tiger-assets/healpack.png", division: "wound", fileSize: 56602 },
