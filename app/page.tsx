@@ -56,9 +56,9 @@ function formatSize(bytes: number): string {
 }
 
 const IMAGE_STATUS_STYLES: Record<ImageStatus, { label: string; color: string }> = {
-  real: { label: "Product Image", color: "bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/20" },
-  placeholder: { label: "Placeholder", color: "bg-[#D2A62C]/10 text-[#a88523] border-[#D2A62C]/20" },
-  missing: { label: "No Image", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/20" },
+  real: { label: "Brand Logo", color: "bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/25" },
+  placeholder: { label: "No Logo Found", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
+  missing: { label: "No Image", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
 }
 
 export default function ImageAuditPage() {
@@ -67,20 +67,20 @@ export default function ImageAuditPage() {
   const placeholderCount = PRODUCTS.filter(p => classifyImage(p.heroImage) === "placeholder").length
   const missingCount = PRODUCTS.filter(p => classifyImage(p.heroImage) === "missing").length
   const needsWork = placeholderCount + missingCount
-  const pctReady = Math.round((realCount / total) * 100)
+
 
   return (
     <div className="min-h-screen" style={{ background: "#EFEDEA" }}>
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         {/* Header */}
         <div className="mb-4">
-          <div className="text-[10px] uppercase tracking-[4px] font-light mb-3" style={{ color: "rgba(35,16,16,0.3)" }}>
+          <div className="text-[10px] uppercase tracking-[4px] font-light mb-3" style={{ color: "rgba(35,16,16,0.5)" }}>
             Internal
           </div>
           <h1 className="font-light tracking-tight leading-tight" style={{ color: "#231010", fontSize: "clamp(28px,4vw,42px)" }}>
             Product Image Audit
           </h1>
-          <p className="mt-3 text-[14.6px] font-light leading-[26px] max-w-2xl" style={{ color: "rgba(35,16,16,0.5)" }}>
+          <p className="mt-3 text-[14.6px] font-light leading-[26px] max-w-2xl" style={{ color: "rgba(35,16,16,0.6)" }}>
             Tracking hero images for the {total} products in the site navigation.
             {needsWork > 0 && ` ${needsWork} product${needsWork === 1 ? "" : "s"} still need${needsWork === 1 ? "s" : ""} real photography.`}
           </p>
@@ -94,27 +94,6 @@ export default function ImageAuditPage() {
           <StatCard label="Missing" value={missingCount} accent="#DF5630" />
         </div>
 
-        {/* Coverage */}
-        <div className="mt-6 rounded-[12px] p-5 border" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.05)" }}>
-          <div className="flex items-center justify-between mb-3">
-            <div className="text-[10px] uppercase tracking-[3.15px] font-light" style={{ color: "rgba(35,16,16,0.3)" }}>
-              Image Coverage
-            </div>
-            <div className="text-[13px] font-light" style={{ color: "rgba(35,16,16,0.5)" }}>
-              {pctReady}% ready
-            </div>
-          </div>
-          <div className="flex rounded-full overflow-hidden h-2.5" style={{ background: "rgba(35,16,16,0.05)" }}>
-            {realCount > 0 && <div style={{ width: `${(realCount / total) * 100}%`, background: "#0d7a3e" }} />}
-            {placeholderCount > 0 && <div style={{ width: `${(placeholderCount / total) * 100}%`, background: "#D2A62C" }} />}
-            {missingCount > 0 && <div style={{ width: `${(missingCount / total) * 100}%`, background: "#DF5630" }} />}
-          </div>
-          <div className="flex gap-5 mt-2.5">
-            <Legend color="#0d7a3e" label="Ready" count={realCount} />
-            <Legend color="#D2A62C" label="Placeholder" count={placeholderCount} />
-            <Legend color="#DF5630" label="Missing" count={missingCount} />
-          </div>
-        </div>
 
         {/* Divisions */}
         {DIVISIONS.map(div => {
@@ -126,7 +105,7 @@ export default function ImageAuditPage() {
                 <h2 className="font-light text-[20px] tracking-tight" style={{ color: "#231010" }}>
                   {div.label}
                 </h2>
-                <span className="text-[12px] font-light" style={{ color: "rgba(35,16,16,0.3)" }}>
+                <span className="text-[12px] font-light" style={{ color: "rgba(35,16,16,0.45)" }}>
                   {divProducts.length} products
                 </span>
               </div>
@@ -140,10 +119,9 @@ export default function ImageAuditPage() {
                     <div
                       key={p.slug}
                       className="rounded-[12px] border overflow-hidden flex flex-col sm:flex-row"
-                      style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.05)" }}
+                      style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}
                     >
-                      {/* Thumbnail */}
-                      <div className="sm:w-[180px] sm:min-h-[120px] relative shrink-0" style={{ background: "rgba(35,16,16,0.02)" }}>
+                      <div className="sm:w-[180px] sm:min-h-[120px] relative shrink-0" style={{ background: "rgba(35,16,16,0.03)" }}>
                         <Image
                           src={p.heroImage}
                           alt={p.title}
@@ -153,13 +131,12 @@ export default function ImageAuditPage() {
                         />
                       </div>
 
-                      {/* Details */}
                       <div className="flex-1 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
                         <div className="flex-1 min-w-0">
                           <div className="font-light text-[15px] tracking-tight" style={{ color: "#231010" }}>
                             {p.navName}
                           </div>
-                          <div className="mt-1.5 flex items-center gap-3 text-[11px] font-mono" style={{ color: "rgba(35,16,16,0.2)" }}>
+                          <div className="mt-1.5 flex items-center gap-3 text-[11px] font-mono" style={{ color: "rgba(35,16,16,0.35)" }}>
                             <span className="truncate">{p.heroImage}</span>
                             <span className="shrink-0">{formatSize(p.fileSize)}</span>
                           </div>
@@ -181,7 +158,7 @@ export default function ImageAuditPage() {
 
         {/* Action Items */}
         {needsWork > 0 && (
-          <div className="mt-14 rounded-[12px] border p-6" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.05)" }}>
+          <div className="mt-14 rounded-[12px] border p-6" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}>
             <h2 className="font-light text-[20px] tracking-tight mb-5" style={{ color: "#231010" }}>
               Needs Attention
             </h2>
@@ -191,10 +168,10 @@ export default function ImageAuditPage() {
                 return (
                   <div key={p.slug} className="flex items-center gap-2">
                     <div className="rounded-full shrink-0" style={{ width: 5, height: 5, background: divColor }} />
-                    <span className="text-[12px] font-light" style={{ color: "rgba(35,16,16,0.5)" }}>
+                    <span className="text-[12px] font-light" style={{ color: "rgba(35,16,16,0.65)" }}>
                       {p.navName}
                     </span>
-                    <span className="text-[10px] font-light" style={{ color: "rgba(35,16,16,0.2)" }}>
+                    <span className="text-[10px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>
                       {classifyImage(p.heroImage) === "placeholder" ? "Placeholder" : "Missing"}
                     </span>
                   </div>
@@ -205,7 +182,7 @@ export default function ImageAuditPage() {
         )}
 
         {/* Footer */}
-        <div className="mt-10 text-center text-[11px] font-light" style={{ color: "rgba(35,16,16,0.15)" }}>
+        <div className="mt-10 text-center text-[11px] font-light" style={{ color: "rgba(35,16,16,0.35)" }}>
           Internal use only \u2014 Tiger BioSciences Product Image Audit \u2014 {total} nav products
         </div>
       </div>
@@ -215,8 +192,8 @@ export default function ImageAuditPage() {
 
 function StatCard({ label, value, accent }: { label: string; value: number; accent?: string }) {
   return (
-    <div className="rounded-[12px] border p-4" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.05)" }}>
-      <div className="text-[10px] uppercase tracking-[2px] font-light mb-1.5" style={{ color: "rgba(35,16,16,0.3)" }}>{label}</div>
+    <div className="rounded-[12px] border p-4" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}>
+      <div className="text-[10px] uppercase tracking-[2px] font-light mb-1.5" style={{ color: "rgba(35,16,16,0.5)" }}>{label}</div>
       <div className="text-[26px] font-light tracking-tight" style={{ color: accent || "#231010" }}>
         {value}
       </div>
@@ -224,13 +201,3 @@ function StatCard({ label, value, accent }: { label: string; value: number; acce
   )
 }
 
-function Legend({ color, label, count }: { color: string; label: string; count: number }) {
-  return (
-    <div className="flex items-center gap-1.5">
-      <div className="rounded-full" style={{ width: 5, height: 5, background: color }} />
-      <span className="text-[11px] font-light" style={{ color: "rgba(35,16,16,0.35)" }}>
-        {label} ({count})
-      </span>
-    </div>
-  )
-}
