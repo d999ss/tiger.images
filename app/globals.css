@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "display";
+  src: local("Inter");
+  font-weight: 300;
+}
+
+:root {
+  --background: #EFEDEA;
+  --foreground: #231010;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.font-display {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
