@@ -14,19 +14,19 @@ interface Product {
 }
 
 const PRODUCTS: Product[] = [
-  { slug: "caregraft", title: "caregraFT\u2122", navName: "caregraFT\u2122", heroImage: "/images/tiger-assets/caregraft.png", division: "wound", status: "In Review", fileSize: 82946 },
+  { slug: "caregraft", title: "caregraFT\u2122", navName: "caregraFT\u2122", heroImage: "/images/tiger-assets/caregraft.png", division: "wound", status: "In Review", fileSize: 84052 },
   { slug: "carepatch", title: "carePATCH\u00AE", navName: "carePATCH\u00AE", heroImage: "/images/tiger-assets/carepatch.png", division: "wound", status: "In Review", fileSize: 249599 },
-  { slug: "carepac", title: "carePAC\u2122", navName: "carePAC\u2122", heroImage: "/images/tiger-assets/carepac-logo.png", division: "wound", status: "In Review", fileSize: 48843 },
-  { slug: "completeft", title: "completeFT\u00AE", navName: "completeFT\u00AE", heroImage: "/images/tiger-assets/completeft.png", division: "wound", status: "In Review", fileSize: 41198 },
-  { slug: "healpack", title: "HealPACK\u2122", navName: "HealPACK\u2122", heroImage: "/images/tiger-assets/healpack.png", division: "wound", status: "In Review", fileSize: 300114 },
-  { slug: "alloclae", title: "alloClae\u2122", navName: "alloClae\u2122", heroImage: "/images/tiger-assets/alloclae.png", division: "aesthetics", status: "Approved", fileSize: 58776 },
-  { slug: "amplifine", title: "Amplifine\u00AE", navName: "Amplifine\u00AE", heroImage: "/images/tiger-assets/amplifine.png", division: "aesthetics", status: "Approved", fileSize: 709422 },
-  { slug: "aveli", title: "Av\u00E9li\u00AE", navName: "Av\u00E9li\u00AE", heroImage: "/images/tiger-assets/aveli.png", division: "aesthetics", status: "Approved", fileSize: 63678 },
-  { slug: "bellafill", title: "Bellafill\u00AE", navName: "Bellafill\u00AE", heroImage: "/images/tiger-assets/bellafill-logo.png", division: "aesthetics", status: "Approved", fileSize: 42999 },
-  { slug: "expanders", title: "Breast Tissue Expanders", navName: "Breast Tissue Expanders", heroImage: "/images/tiger-assets/expanders.png", division: "aesthetics", status: "Approved", fileSize: 85842 },
+  { slug: "carepac", title: "carePAC\u2122", navName: "carePAC\u2122", heroImage: "/images/tiger-assets/carepac-logo.png", division: "wound", status: "In Review", fileSize: 52778 },
+  { slug: "completeft", title: "completeFT\u00AE", navName: "completeFT\u00AE", heroImage: "/images/tiger-assets/completeft.png", division: "wound", status: "In Review", fileSize: 43759 },
+  { slug: "healpack", title: "HealPACK\u2122", navName: "HealPACK\u2122", heroImage: "/images/tiger-assets/healpack.png", division: "wound", status: "In Review", fileSize: 56602 },
+  { slug: "alloclae", title: "alloClae\u2122", navName: "alloClae\u2122", heroImage: "/images/tiger-assets/alloclae.png", division: "aesthetics", status: "Approved", fileSize: 64123 },
+  { slug: "amplifine", title: "Amplifine\u00AE", navName: "Amplifine\u00AE", heroImage: "/images/tiger-assets/amplifine.png", division: "aesthetics", status: "Approved", fileSize: 57014 },
+  { slug: "aveli", title: "Av\u00E9li\u00AE", navName: "Av\u00E9li\u00AE", heroImage: "/images/tiger-assets/aveli.png", division: "aesthetics", status: "Approved", fileSize: 66551 },
+  { slug: "bellafill", title: "Bellafill\u00AE", navName: "Bellafill\u00AE", heroImage: "/images/tiger-assets/bellafill-logo.png", division: "aesthetics", status: "Approved", fileSize: 47146 },
+  { slug: "expanders", title: "Breast Tissue Expanders", navName: "Breast Tissue Expanders", heroImage: "/images/tiger-assets/expanders.png", division: "aesthetics", status: "Approved", fileSize: 67795 },
   { slug: "sientra", title: "Sientra\u00AE", navName: "Sientra\u00AE", heroImage: "/images/tiger-assets/sientra.png", division: "aesthetics", status: "Approved", fileSize: 1166397 },
-  { slug: "viality", title: "Viality\u00AE", navName: "Viality\u00AE", heroImage: "/images/tiger-assets/viality.png", division: "aesthetics", status: "Approved", fileSize: 53119 },
-  { slug: "implant-delivery", title: "Tiger Guard\u2122", navName: "Tiger Guard\u2122", heroImage: "/images/tiger-assets/tigerguard.png", division: "aesthetics", status: "", fileSize: 42705 },
+  { slug: "viality", title: "Viality\u00AE", navName: "Viality\u00AE", heroImage: "/images/tiger-assets/viality.png", division: "aesthetics", status: "Approved", fileSize: 57896 },
+  { slug: "implant-delivery", title: "Tiger Guard\u2122", navName: "Tiger Guard\u2122", heroImage: "/images/tiger-assets/tigerguard.png", division: "aesthetics", status: "", fileSize: 47303 },
   { slug: "retractor", title: "Tiger View\u2122", navName: "Tiger View\u2122", heroImage: "/images/figma/prod-generic-box-aesthetics.png", division: "aesthetics", status: "", fileSize: 264510 },
 ]
 
