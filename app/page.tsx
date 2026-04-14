@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 type Division = "wound" | "aesthetics"
-type ImageStatus = "real" | "placeholder" | "missing"
+type ImageStatus = "real" | "placeholder" | "missing" | "needs-review"
 
 interface Product {
   slug: string
@@ -44,9 +44,12 @@ const DIVISIONS: { key: Division; label: string; color: string; slugs: string[] 
   },
 ]
 
-function classifyImage(heroImage: string): ImageStatus {
+const NEEDS_REVIEW_SLUGS = ["expanders"]
+
+function classifyImage(heroImage: string, slug?: string): ImageStatus {
   if (!heroImage) return "missing"
   if (heroImage.includes("prod-generic-box")) return "placeholder"
+  if (slug && NEEDS_REVIEW_SLUGS.includes(slug)) return "needs-review"
   return "real"
 }
 
@@ -57,16 +60,18 @@ function formatSize(bytes: number): string {
 
 const IMAGE_STATUS_STYLES: Record<ImageStatus, { label: string; color: string }> = {
   real: { label: "Brand Logo", color: "bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/25" },
+  "needs-review": { label: "Needs Review", color: "bg-[#D2A62C]/10 text-[#a88523] border-[#D2A62C]/25" },
   placeholder: { label: "No Logo Found", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
   missing: { label: "No Image", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
 }
 
 export default function ImageAuditPage() {
   const total = PRODUCTS.length
-  const realCount = PRODUCTS.filter(p => classifyImage(p.heroImage) === "real").length
-  const placeholderCount = PRODUCTS.filter(p => classifyImage(p.heroImage) === "placeholder").length
-  const missingCount = PRODUCTS.filter(p => classifyImage(p.heroImage) === "missing").length
-  const needsWork = placeholderCount + missingCount
+  const realCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "real").length
+  const reviewCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "needs-review").length
+  const placeholderCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "placeholder").length
+  const missingCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "missing").length
+  const needsWork = reviewCount + placeholderCount + missingCount
 
 
   return (
@@ -81,16 +86,16 @@ export default function ImageAuditPage() {
             Product Image Audit
           </h1>
           <p className="mt-3 text-[14.6px] font-light leading-[26px] max-w-2xl" style={{ color: "rgba(35,16,16,0.6)" }}>
-            Tracking hero images for the {total} products in the site navigation.
-            {needsWork > 0 && ` ${needsWork} product${needsWork === 1 ? "" : "s"} still need${needsWork === 1 ? "s" : ""} real photography.`}
+            Brand logos for the {total} products listed in the site navigation. {realCount} of {total} have approved logos.
           </p>
         </div>
 
         {/* Stats */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-5 gap-3">
           <StatCard label="Total" value={total} />
           <StatCard label="Ready" value={realCount} accent="#0d7a3e" />
-          <StatCard label="Placeholder" value={placeholderCount} accent="#D2A62C" />
+          <StatCard label="Needs Review" value={reviewCount} accent="#D2A62C" />
+          <StatCard label="No Logo" value={placeholderCount} accent="#DF5630" />
           <StatCard label="Missing" value={missingCount} accent="#DF5630" />
         </div>
 
@@ -112,7 +117,7 @@ export default function ImageAuditPage() {
 
               <div className="grid gap-3">
                 {divProducts.map(p => {
-                  const imgStatus = classifyImage(p.heroImage)
+                  const imgStatus = classifyImage(p.heroImage, p.slug)
                   const imgStyle = IMAGE_STATUS_STYLES[imgStatus]
 
                   return (
@@ -163,7 +168,7 @@ export default function ImageAuditPage() {
               Needs Attention
             </h2>
             <div className="space-y-2">
-              {PRODUCTS.filter(p => classifyImage(p.heroImage) !== "real").map(p => {
+              {PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) !== "real").map(p => {
                 const divColor = DIVISIONS.find(d => d.key === p.division)?.color || "#231010"
                 return (
                   <div key={p.slug} className="flex items-center gap-2">
@@ -172,7 +177,7 @@ export default function ImageAuditPage() {
                       {p.navName}
                     </span>
                     <span className="text-[10px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>
-                      {classifyImage(p.heroImage) === "placeholder" ? "Placeholder" : "Missing"}
+                      {classifyImage(p.heroImage, p.slug) === "needs-review" ? "Needs Review" : classifyImage(p.heroImage, p.slug) === "placeholder" ? "No Logo" : "Missing"}
                     </span>
                   </div>
                 )
