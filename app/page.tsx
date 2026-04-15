@@ -94,14 +94,6 @@ export default function ImageAuditPage() {
           </p>
         </div>
 
-        {/* Stats */}
-        <div className="mt-8 sm:mt-10 grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
-          <StatCard label="Total" value={total} />
-          <StatCard label="Ready" value={realCount} accent="#0d7a3e" />
-          <StatCard label="Needs Review" value={reviewCount} accent="#D2A62C" />
-          <StatCard label="No Logo" value={placeholderCount} accent="#DF5630" />
-          <StatCard label="Missing" value={missingCount} accent="#DF5630" />
-        </div>
 
         {/* Divisions */}
         {DIVISIONS.map(div => {
