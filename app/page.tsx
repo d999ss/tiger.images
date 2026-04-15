@@ -117,11 +117,11 @@ export default function ImageAuditPage() {
                 </span>
               </div>
 
-              {/* Column Headers */}
-              <div className="grid grid-cols-3 gap-px mb-2 px-1">
-                <div className="text-[8px] sm:text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Logo</div>
-                <div className="text-[8px] sm:text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Packaging</div>
-                <div className="text-[8px] sm:text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Body Location</div>
+              {/* Column Headers — desktop only */}
+              <div className="hidden sm:grid sm:grid-cols-3 gap-px mb-2 px-1">
+                <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Logo</div>
+                <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Packaging</div>
+                <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Body Location</div>
               </div>
 
               <div className="grid gap-2 sm:gap-3">
@@ -130,6 +130,11 @@ export default function ImageAuditPage() {
                   const packOk = !!p.packaging
                   const locOk = !!p.location
                   const score = [logoOk, packOk, locOk].filter(Boolean).length
+                  const assets: { src: string | null; label: string; size: number; dl: string }[] = [
+                    { src: p.logo, label: "Logo", size: p.logoSize, dl: `${p.slug}-logo.png` },
+                    { src: p.packaging, label: "Packaging", size: p.packagingSize, dl: `${p.slug}-packaging.png` },
+                    { src: p.location, label: "Location", size: p.locationSize, dl: `${p.slug}-location.png` },
+                  ]
 
                   return (
                     <div
@@ -137,13 +142,13 @@ export default function ImageAuditPage() {
                       className="rounded-[12px] border overflow-hidden"
                       style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}
                     >
-                      {/* Name + status */}
+                      {/* Name + score */}
                       <div className="px-3 sm:px-4 pt-3 pb-1 flex items-center justify-between gap-2">
-                        <div className="font-light text-[13px] sm:text-[15px] tracking-tight" style={{ color: "#231010" }}>
+                        <div className="font-light text-[14px] sm:text-[15px] tracking-tight" style={{ color: "#231010" }}>
                           {p.navName}
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[9px] sm:text-[10px] font-light" style={{ color: score === 3 ? "#0d7a3e" : score >= 1 ? "#a88523" : "rgba(35,16,16,0.35)" }}>
+                          <span className="text-[10px] font-light" style={{ color: score === 3 ? "#0d7a3e" : score >= 1 ? "#a88523" : "rgba(35,16,16,0.35)" }}>
                             {score}/3
                           </span>
                           {score === 3 && (
@@ -154,31 +159,48 @@ export default function ImageAuditPage() {
                         </div>
                       </div>
 
-                      {/* Three image columns */}
-                      <div className="grid grid-cols-3 gap-px" style={{ background: "rgba(35,16,16,0.06)" }}>
+                      {/* Desktop: three columns side by side */}
+                      <div className="hidden sm:grid sm:grid-cols-3 gap-px" style={{ background: "rgba(35,16,16,0.06)" }}>
                         <ImageCell src={p.logo} alt={p.navName} label="Logo" size={p.logoSize} slug={p.slug} onPreview={setPreview} />
                         <ImageCell src={p.packaging} alt={p.navName} label="Packaging" size={p.packagingSize} slug={p.slug} onPreview={setPreview} />
                         <ImageCell src={p.location} alt={p.navName} label="Location" size={p.locationSize} slug={p.slug} onPreview={setPreview} />
                       </div>
 
-                      {/* Download row */}
-                      <div className="px-3 sm:px-4 py-2 flex items-center justify-between" style={{ borderTop: "1px solid rgba(35,16,16,0.06)" }}>
-                        <span className="text-[9px] sm:text-[10px] font-mono" style={{ color: "rgba(35,16,16,0.3)" }}>
+                      {/* Mobile: stacked with labels */}
+                      <div className="sm:hidden grid gap-px" style={{ background: "rgba(35,16,16,0.06)" }}>
+                        {assets.map(a => (
+                          <div key={a.label} style={{ background: "#fbfcff" }}>
+                            <div className="flex items-center justify-between px-3 pt-2 pb-1">
+                              <span className="text-[9px] uppercase tracking-[1.5px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>{a.label}</span>
+                              {a.src && (
+                                <a href={a.src} download={a.dl} className="inline-flex items-center gap-1 text-[8px] uppercase tracking-[1px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>
+                                  <DownloadIcon /> Download
+                                </a>
+                              )}
+                            </div>
+                            <ImageCell src={a.src} alt={p.navName} label={a.label} size={a.size} slug={p.slug} onPreview={setPreview} />
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Desktop download row */}
+                      <div className="hidden sm:flex px-4 py-2 items-center justify-between" style={{ borderTop: "1px solid rgba(35,16,16,0.06)" }}>
+                        <span className="text-[10px] font-mono" style={{ color: "rgba(35,16,16,0.3)" }}>
                           {[p.logo && formatSize(p.logoSize), p.packaging && formatSize(p.packagingSize), p.location && formatSize(p.locationSize)].filter(Boolean).join(" / ")}
                         </span>
                         <div className="flex gap-1.5">
                           {p.logo && (
-                            <a href={p.logo} download={`${p.slug}-logo.png`} className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 text-[7px] sm:text-[8px] uppercase tracking-[1px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]" style={{ color: "rgba(35,16,16,0.45)", borderColor: "rgba(35,16,16,0.12)" }}>
+                            <a href={p.logo} download={`${p.slug}-logo.png`} className="inline-flex items-center gap-1 px-2 py-0.5 text-[8px] uppercase tracking-[1px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]" style={{ color: "rgba(35,16,16,0.45)", borderColor: "rgba(35,16,16,0.12)" }}>
                               <DownloadIcon /> Logo
                             </a>
                           )}
                           {p.packaging && (
-                            <a href={p.packaging} download={`${p.slug}-packaging.png`} className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 text-[7px] sm:text-[8px] uppercase tracking-[1px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]" style={{ color: "rgba(35,16,16,0.45)", borderColor: "rgba(35,16,16,0.12)" }}>
+                            <a href={p.packaging} download={`${p.slug}-packaging.png`} className="inline-flex items-center gap-1 px-2 py-0.5 text-[8px] uppercase tracking-[1px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]" style={{ color: "rgba(35,16,16,0.45)", borderColor: "rgba(35,16,16,0.12)" }}>
                               <DownloadIcon /> Pkg
                             </a>
                           )}
                           {p.location && (
-                            <a href={p.location} download={`${p.slug}-location.png`} className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 text-[7px] sm:text-[8px] uppercase tracking-[1px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]" style={{ color: "rgba(35,16,16,0.45)", borderColor: "rgba(35,16,16,0.12)" }}>
+                            <a href={p.location} download={`${p.slug}-location.png`} className="inline-flex items-center gap-1 px-2 py-0.5 text-[8px] uppercase tracking-[1px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]" style={{ color: "rgba(35,16,16,0.45)", borderColor: "rgba(35,16,16,0.12)" }}>
                               <DownloadIcon /> Loc
                             </a>
                           )}
