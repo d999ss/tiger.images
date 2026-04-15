@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Product Image Audit — Tiger BioSciences",
-  description: "Internal product image tracking for Tiger BioSciences",
+  title: "Brand Asset Audit — Tiger BioSciences",
+  description: "Internal brand asset tracking for Tiger BioSciences",
   robots: "noindex, nofollow",
 }
 
