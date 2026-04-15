@@ -23,9 +23,9 @@ const PRODUCTS: Product[] = [
   { slug: "completeft", navName: "completeFT\u00AE", logo: "/images/tiger-assets/completeft.png", logoSize: 43759, productImage: null, productImageSize: 0, division: "wound" },
   { slug: "healpack", navName: "HealPACK\u2122", logo: "/images/tiger-assets/healpack.png", logoSize: 56602, productImage: "/images/products/healpack.png", productImageSize: 300114, division: "wound" },
   { slug: "alloclae", navName: "alloClae\u2122", logo: "/images/tiger-assets/alloclae.png", logoSize: 38761, productImage: null, productImageSize: 0, division: "aesthetics" },
-  { slug: "amplifine", navName: "Amplifine\u00AE", logo: "/images/tiger-assets/amplifine.png", logoSize: 57014, productImage: "/images/products/amplifine.png", productImageSize: 709422, division: "aesthetics" },
+  { slug: "amplifine", navName: "Amplifine\u00AE", logo: "/images/tiger-assets/amplifine.png", logoSize: 57014, productImage: null, productImageSize: 0, division: "aesthetics" },
   { slug: "aveli", navName: "Av\u00E9li\u00AE", logo: "/images/tiger-assets/aveli.png", logoSize: 66551, productImage: null, productImageSize: 0, division: "aesthetics" },
-  { slug: "bellafill", navName: "Bellafill\u00AE", logo: "/images/tiger-assets/bellafill-logo.png", logoSize: 47146, productImage: "/images/products/bellafill.png", productImageSize: 611886, division: "aesthetics" },
+  { slug: "bellafill", navName: "Bellafill\u00AE", logo: "/images/tiger-assets/bellafill-logo.png", logoSize: 47146, productImage: null, productImageSize: 0, division: "aesthetics" },
   { slug: "expanders", navName: "Breast Tissue Expanders", logo: "/images/tiger-assets/expanders.png", logoSize: 67795, productImage: "/images/products/expanders.png", productImageSize: 85842, division: "aesthetics" },
   { slug: "sientra", navName: "Sientra\u00AE", logo: "/images/tiger-assets/sientra.png", logoSize: 37579, productImage: "/images/products/sientra.png", productImageSize: 1166397, division: "aesthetics" },
   { slug: "viality", navName: "Viality\u00AE", logo: "/images/tiger-assets/viality.png", logoSize: 57896, productImage: null, productImageSize: 0, division: "aesthetics" },
@@ -76,7 +76,7 @@ export default function ImageAuditPage() {
             Internal
           </div>
           <h1 className="font-light tracking-tight leading-tight" style={{ color: "#231010", fontSize: "clamp(24px,4vw,42px)" }}>
-            Product Image Audit
+            Packaging Audit
           </h1>
           <p className="mt-3 text-[14px] sm:text-[14.6px] font-light leading-[24px] sm:leading-[26px] max-w-2xl" style={{ color: "rgba(35,16,16,0.6)" }}>
             {total} products in the site navigation. {withLogo} have brand logos, {withProduct} have product images.
@@ -101,7 +101,7 @@ export default function ImageAuditPage() {
               {/* Column Headers */}
               <div className="hidden sm:grid sm:grid-cols-[1fr_1fr] gap-3 mb-2 px-1">
                 <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Brand Logo</div>
-                <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Product Image</div>
+                <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Packaging</div>
               </div>
 
               <div className="grid gap-2 sm:gap-3">
@@ -127,12 +127,12 @@ export default function ImageAuditPage() {
                           </span>
                           {hasProduct && (
                             <span className="inline-flex items-center px-2 py-0.5 text-[8px] sm:text-[9px] uppercase tracking-[1.2px] font-light rounded-full border bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/25">
-                              Product Image
+                              Packaging
                             </span>
                           )}
                           {!hasProduct && (
                             <span className="inline-flex items-center px-2 py-0.5 text-[8px] sm:text-[9px] uppercase tracking-[1.2px] font-light rounded-full border bg-[#D2A62C]/10 text-[#a88523] border-[#D2A62C]/25">
-                              No Product Image
+                              No Packaging
                             </span>
                           )}
                         </div>
@@ -149,18 +149,18 @@ export default function ImageAuditPage() {
                           <Image src={p.logo} alt={`${p.navName} logo`} fill sizes="(max-width: 640px) 50vw, 300px" className="object-contain p-4 sm:p-6" />
                         </button>
 
-                        {/* Product Image */}
+                        {/* Packaging */}
                         {hasProduct ? (
                           <button
-                            onClick={() => setPreview({ src: p.productImage!, name: p.navName, slug: p.slug, label: "Product Image", size: p.productImageSize })}
+                            onClick={() => setPreview({ src: p.productImage!, name: p.navName, slug: p.slug, label: "Packaging", size: p.productImageSize })}
                             className="relative aspect-[3/2] cursor-pointer"
                             style={{ background: "#fbfcff" }}
                           >
                             <Image src={p.productImage!} alt={`${p.navName} product`} fill sizes="(max-width: 640px) 50vw, 300px" className="object-contain p-4 sm:p-6" />
                           </button>
                         ) : (
-                          <div className="relative aspect-[3/2] flex items-center justify-center" style={{ background: "#fbfcff" }}>
-                            <span className="text-[10px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.15)" }}>Needed</span>
+                          <div className="relative aspect-[3/2] flex items-center justify-center" style={{ background: "rgba(35,16,16,0.06)" }}>
+                            <span className="text-[10px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.3)" }}>Needed</span>
                           </div>
                         )}
                       </div>
@@ -213,7 +213,7 @@ export default function ImageAuditPage() {
                   const divColor = DIVISIONS.find(d => d.key === p.division)?.color || "#231010"
                   const issues: string[] = []
                   if (classifyLogo(p.slug, p.logo) !== "real") issues.push("No Logo")
-                  if (!p.productImage) issues.push("No Product Image")
+                  if (!p.productImage) issues.push("No Packaging")
                   return (
                     <div key={p.slug} className="flex items-center gap-2">
                       <div className="rounded-full shrink-0" style={{ width: 5, height: 5, background: divColor }} />
@@ -233,7 +233,7 @@ export default function ImageAuditPage() {
 
         {/* Footer */}
         <div className="mt-8 sm:mt-10 text-center text-[11px] font-light" style={{ color: "rgba(35,16,16,0.35)" }}>
-          Internal use only \u2014 Tiger BioSciences Product Image Audit \u2014 {total} nav products
+          Internal use only \u2014 Tiger BioSciences Packaging Audit \u2014 {total} nav products
         </div>
       </div>
 
