@@ -24,14 +24,14 @@ const PRODUCTS: Product[] = [
   { slug: "completeft", navName: "completeFT\u00AE", logo: "/images/tiger-assets/completeft.png", logoSize: 43759, packaging: null, packagingSize: 0, location: null, locationSize: 0, division: "wound" },
   { slug: "healpack", navName: "HealPACK\u2122", logo: "/images/tiger-assets/healpack.png", logoSize: 56602, packaging: null, packagingSize: 0, location: null, locationSize: 0, division: "wound" },
   { slug: "carebox", navName: "careBOX\u2122", logo: null, logoSize: 0, packaging: "/images/products/carebox.png", packagingSize: 236265, location: null, locationSize: 0, division: "wound" },
-  { slug: "alloclae", navName: "alloClae\u2122", logo: "/images/tiger-assets/alloclae.png", logoSize: 38761, packaging: null, packagingSize: 0, location: "/images/locations/alloclae.png", locationSize: 1445980, division: "aesthetics" },
-  { slug: "amplifine", navName: "Amplifine\u00AE", logo: "/images/tiger-assets/amplifine.png", logoSize: 80730, packaging: "/images/products/amplifine.png", packagingSize: 140416, location: "/images/locations/amplifine.png", locationSize: 1652621, division: "aesthetics" },
+  { slug: "alloclae", navName: "alloClae\u2122", logo: "/images/tiger-assets/alloclae.png", logoSize: 38761, packaging: null, packagingSize: 0, location: null, locationSize: 0, division: "aesthetics" },
+  { slug: "amplifine", navName: "Amplifine\u00AE", logo: "/images/tiger-assets/amplifine.png", logoSize: 80730, packaging: "/images/products/amplifine.png", packagingSize: 140416, location: null, locationSize: 0, division: "aesthetics" },
   { slug: "aveli", navName: "Av\u00E9li\u00AE", logo: "/images/tiger-assets/aveli.png", logoSize: 66551, packaging: null, packagingSize: 0, location: "/images/locations/aveli.png", locationSize: 907525, division: "aesthetics" },
   { slug: "bellafill", navName: "Bellafill\u00AE", logo: "/images/tiger-assets/bellafill-logo.png", logoSize: 47146, packaging: null, packagingSize: 0, location: null, locationSize: 0, division: "aesthetics" },
   { slug: "expanders", navName: "Breast Tissue Expanders", logo: null, logoSize: 0, packaging: "/images/products/expanders.png", packagingSize: 317930, location: null, locationSize: 0, division: "aesthetics" },
   { slug: "sientra", navName: "Sientra\u00AE", logo: "/images/tiger-assets/sientra.png", logoSize: 37579, packaging: null, packagingSize: 0, location: null, locationSize: 0, division: "aesthetics" },
   { slug: "silhouette", navName: "Silhouette Instalift\u2122", logo: "/images/tiger-assets/silhouette.png", logoSize: 20079, packaging: null, packagingSize: 0, location: null, locationSize: 0, division: "aesthetics" },
-  { slug: "viality", navName: "Viality\u00AE", logo: "/images/tiger-assets/viality.png", logoSize: 57896, packaging: "/images/products/viality.png", packagingSize: 439547, location: "/images/locations/viality.png", locationSize: 1759775, division: "aesthetics" },
+  { slug: "viality", navName: "Viality\u00AE", logo: "/images/tiger-assets/viality.png", logoSize: 57896, packaging: "/images/products/viality.png", packagingSize: 439547, location: null, locationSize: 0, division: "aesthetics" },
   { slug: "implant-delivery", navName: "Tiger Guard\u2122", logo: "/images/tiger-assets/tigerguard.png", logoSize: 47303, packaging: null, packagingSize: 0, location: null, locationSize: 0, division: "aesthetics" },
 ]
 
