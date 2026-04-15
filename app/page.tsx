@@ -4,79 +4,68 @@ import Image from "next/image"
 import { useState } from "react"
 
 type Division = "wound" | "aesthetics"
-type ImageStatus = "real" | "placeholder" | "missing" | "needs-review"
+type ImageStatus = "real" | "needs-review" | "missing"
 
 interface Product {
   slug: string
-  title: string
   navName: string
-  heroImage: string
+  logo: string
+  logoSize: number
+  productImage: string | null
+  productImageSize: number
   division: Division
-  fileSize: number
 }
 
 const PRODUCTS: Product[] = [
-  { slug: "caregraft", title: "caregraFT\u2122", navName: "caregraFT\u2122", heroImage: "/images/tiger-assets/caregraft.png", division: "wound", fileSize: 84052 },
-  { slug: "carepatch", title: "carePATCH\u00AE", navName: "carePATCH\u00AE", heroImage: "/images/tiger-assets/carepatch.png", division: "wound", fileSize: 41669 },
-  { slug: "carepac", title: "carePAC\u2122", navName: "carePAC\u2122", heroImage: "/images/tiger-assets/carepac-logo.png", division: "wound", fileSize: 52778 },
-  { slug: "completeft", title: "completeFT\u00AE", navName: "completeFT\u00AE", heroImage: "/images/tiger-assets/completeft.png", division: "wound", fileSize: 43759 },
-  { slug: "healpack", title: "HealPACK\u2122", navName: "HealPACK\u2122", heroImage: "/images/tiger-assets/healpack.png", division: "wound", fileSize: 56602 },
-  { slug: "alloclae", title: "alloClae\u2122", navName: "alloClae\u2122", heroImage: "/images/tiger-assets/alloclae.png", division: "aesthetics", fileSize: 38761 },
-  { slug: "amplifine", title: "Amplifine\u00AE", navName: "Amplifine\u00AE", heroImage: "/images/tiger-assets/amplifine.png", division: "aesthetics", fileSize: 57014 },
-  { slug: "aveli", title: "Av\u00E9li\u00AE", navName: "Av\u00E9li\u00AE", heroImage: "/images/tiger-assets/aveli.png", division: "aesthetics", fileSize: 66551 },
-  { slug: "bellafill", title: "Bellafill\u00AE", navName: "Bellafill\u00AE", heroImage: "/images/tiger-assets/bellafill-logo.png", division: "aesthetics", fileSize: 47146 },
-  { slug: "expanders", title: "Breast Tissue Expanders", navName: "Breast Tissue Expanders", heroImage: "/images/tiger-assets/expanders.png", division: "aesthetics", fileSize: 67795 },
-  { slug: "sientra", title: "Sientra\u00AE", navName: "Sientra\u00AE", heroImage: "/images/tiger-assets/sientra.png", division: "aesthetics", fileSize: 37579 },
-  { slug: "viality", title: "Viality\u00AE", navName: "Viality\u00AE", heroImage: "/images/tiger-assets/viality.png", division: "aesthetics", fileSize: 57896 },
-  { slug: "implant-delivery", title: "Tiger Guard\u2122", navName: "Tiger Guard\u2122", heroImage: "/images/tiger-assets/tigerguard.png", division: "aesthetics", fileSize: 47303 },
-  { slug: "retractor", title: "Tiger View\u2122", navName: "Tiger View\u2122", heroImage: "/images/figma/prod-generic-box-aesthetics.png", division: "aesthetics", fileSize: 264510 },
+  { slug: "caregraft", navName: "caregraFT\u2122", logo: "/images/tiger-assets/caregraft.png", logoSize: 84052, productImage: null, productImageSize: 0, division: "wound" },
+  { slug: "carepatch", navName: "carePATCH\u00AE", logo: "/images/tiger-assets/carepatch.png", logoSize: 41669, productImage: "/images/products/carepatch.png", productImageSize: 249599, division: "wound" },
+  { slug: "carepac", navName: "carePAC\u2122", logo: "/images/tiger-assets/carepac-logo.png", logoSize: 52778, productImage: "/images/products/carepac.png", productImageSize: 511005, division: "wound" },
+  { slug: "completeft", navName: "completeFT\u00AE", logo: "/images/tiger-assets/completeft.png", logoSize: 43759, productImage: null, productImageSize: 0, division: "wound" },
+  { slug: "healpack", navName: "HealPACK\u2122", logo: "/images/tiger-assets/healpack.png", logoSize: 56602, productImage: "/images/products/healpack.png", productImageSize: 300114, division: "wound" },
+  { slug: "alloclae", navName: "alloClae\u2122", logo: "/images/tiger-assets/alloclae.png", logoSize: 38761, productImage: null, productImageSize: 0, division: "aesthetics" },
+  { slug: "amplifine", navName: "Amplifine\u00AE", logo: "/images/tiger-assets/amplifine.png", logoSize: 57014, productImage: "/images/products/amplifine.png", productImageSize: 709422, division: "aesthetics" },
+  { slug: "aveli", navName: "Av\u00E9li\u00AE", logo: "/images/tiger-assets/aveli.png", logoSize: 66551, productImage: null, productImageSize: 0, division: "aesthetics" },
+  { slug: "bellafill", navName: "Bellafill\u00AE", logo: "/images/tiger-assets/bellafill-logo.png", logoSize: 47146, productImage: "/images/products/bellafill.png", productImageSize: 611886, division: "aesthetics" },
+  { slug: "expanders", navName: "Breast Tissue Expanders", logo: "/images/tiger-assets/expanders.png", logoSize: 67795, productImage: "/images/products/expanders.png", productImageSize: 85842, division: "aesthetics" },
+  { slug: "sientra", navName: "Sientra\u00AE", logo: "/images/tiger-assets/sientra.png", logoSize: 37579, productImage: "/images/products/sientra.png", productImageSize: 1166397, division: "aesthetics" },
+  { slug: "viality", navName: "Viality\u00AE", logo: "/images/tiger-assets/viality.png", logoSize: 57896, productImage: null, productImageSize: 0, division: "aesthetics" },
+  { slug: "implant-delivery", navName: "Tiger Guard\u2122", logo: "/images/tiger-assets/tigerguard.png", logoSize: 47303, productImage: null, productImageSize: 0, division: "aesthetics" },
+  { slug: "retractor", navName: "Tiger View\u2122", logo: "/images/figma/prod-generic-box-aesthetics.png", logoSize: 264510, productImage: null, productImageSize: 0, division: "aesthetics" },
 ]
 
 const DIVISIONS: { key: Division; label: string; color: string; slugs: string[] }[] = [
-  {
-    key: "wound",
-    label: "Wound Care Solutions",
-    color: "#DF5630",
-    slugs: ["caregraft", "carepatch", "carepac", "completeft", "healpack"],
-  },
-  {
-    key: "aesthetics",
-    label: "Aesthetic Solutions",
-    color: "#D2A62C",
-    slugs: ["alloclae", "amplifine", "aveli", "bellafill", "expanders", "sientra", "viality", "implant-delivery", "retractor"],
-  },
+  { key: "wound", label: "Wound Care Solutions", color: "#DF5630", slugs: ["caregraft", "carepatch", "carepac", "completeft", "healpack"] },
+  { key: "aesthetics", label: "Aesthetic Solutions", color: "#D2A62C", slugs: ["alloclae", "amplifine", "aveli", "bellafill", "expanders", "sientra", "viality", "implant-delivery", "retractor"] },
 ]
 
 const NEEDS_REVIEW_SLUGS = ["expanders", "retractor"]
 
-function classifyImage(heroImage: string, slug?: string): ImageStatus {
-  if (!heroImage) return "missing"
-  if (slug && NEEDS_REVIEW_SLUGS.includes(slug)) return "needs-review"
-  if (heroImage.includes("prod-generic-box")) return "needs-review"
+function classifyLogo(slug: string, logo: string): ImageStatus {
+  if (!logo) return "missing"
+  if (NEEDS_REVIEW_SLUGS.includes(slug)) return "needs-review"
+  if (logo.includes("prod-generic-box")) return "needs-review"
   return "real"
 }
 
 function formatSize(bytes: number): string {
+  if (!bytes) return ""
   const kb = Math.round(bytes / 1024)
   return kb > 1024 ? `${(kb / 1024).toFixed(1)} MB` : `${kb} KB`
 }
 
-const IMAGE_STATUS_STYLES: Record<ImageStatus, { label: string; color: string }> = {
-  real: { label: "Brand Logo", color: "bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/25" },
-  "needs-review": { label: "No Logo Found", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
-  placeholder: { label: "No Logo Found", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
-  missing: { label: "No Image", color: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
+const LOGO_STATUS: Record<ImageStatus, { label: string; cls: string }> = {
+  real: { label: "Brand Logo", cls: "bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/25" },
+  "needs-review": { label: "No Logo Found", cls: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
+  missing: { label: "No Image", cls: "bg-[#DF5630]/10 text-[#b54426] border-[#DF5630]/25" },
 }
 
-export default function ImageAuditPage() {
-  const [preview, setPreview] = useState<Product | null>(null)
+type PreviewData = { src: string; name: string; slug: string; label: string; size: number }
 
+export default function ImageAuditPage() {
+  const [preview, setPreview] = useState<PreviewData | null>(null)
   const total = PRODUCTS.length
-  const realCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "real").length
-  const reviewCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "needs-review").length
-  const placeholderCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "placeholder").length
-  const missingCount = PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) === "missing").length
-  const needsWork = reviewCount + placeholderCount + missingCount
+  const withLogo = PRODUCTS.filter(p => classifyLogo(p.slug, p.logo) === "real").length
+  const withProduct = PRODUCTS.filter(p => p.productImage).length
 
   return (
     <div className="min-h-screen" style={{ background: "#EFEDEA" }}>
@@ -90,10 +79,9 @@ export default function ImageAuditPage() {
             Product Image Audit
           </h1>
           <p className="mt-3 text-[14px] sm:text-[14.6px] font-light leading-[24px] sm:leading-[26px] max-w-2xl" style={{ color: "rgba(35,16,16,0.6)" }}>
-            Brand logos for the {total} products listed in the site navigation. {realCount} of {total} have approved logos.
+            {total} products in the site navigation. {withLogo} have brand logos, {withProduct} have product images.
           </p>
         </div>
-
 
         {/* Divisions */}
         {DIVISIONS.map(div => {
@@ -110,10 +98,17 @@ export default function ImageAuditPage() {
                 </span>
               </div>
 
+              {/* Column Headers */}
+              <div className="hidden sm:grid sm:grid-cols-[1fr_1fr] gap-3 mb-2 px-1">
+                <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Brand Logo</div>
+                <div className="text-[9px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>Product Image</div>
+              </div>
+
               <div className="grid gap-2 sm:gap-3">
                 {divProducts.map(p => {
-                  const imgStatus = classifyImage(p.heroImage, p.slug)
-                  const imgStyle = IMAGE_STATUS_STYLES[imgStatus]
+                  const logoStatus = classifyLogo(p.slug, p.logo)
+                  const logoStyle = LOGO_STATUS[logoStatus]
+                  const hasProduct = !!p.productImage
 
                   return (
                     <div
@@ -121,88 +116,79 @@ export default function ImageAuditPage() {
                       className="rounded-[12px] border overflow-hidden"
                       style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}
                     >
-                      {/* Mobile: stacked layout */}
-                      <div className="sm:hidden">
-                        <button
-                          onClick={() => setPreview(p)}
-                          className="w-full aspect-[3/1] relative cursor-pointer"
-                          style={{ background: "rgba(35,16,16,0.03)" }}
-                        >
-                          <Image
-                            src={p.heroImage}
-                            alt={p.title}
-                            fill
-                            sizes="100vw"
-                            className="object-contain p-4"
-                          />
-                        </button>
-                        <div className="p-3">
-                          <div className="flex items-center justify-between gap-2">
-                            <div className="font-light text-[14px] tracking-tight min-w-0 truncate" style={{ color: "#231010" }}>
-                              {p.navName}
-                            </div>
-                            <span className={`inline-flex items-center px-2 py-0.5 text-[8px] uppercase tracking-[1.2px] font-light rounded-full border shrink-0 ${imgStyle.color}`}>
-                              {imgStyle.label}
+                      {/* Product name bar */}
+                      <div className="px-4 pt-3 pb-1 flex items-center justify-between gap-2">
+                        <div className="font-light text-[14px] sm:text-[15px] tracking-tight" style={{ color: "#231010" }}>
+                          {p.navName}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className={`inline-flex items-center px-2 py-0.5 text-[8px] sm:text-[9px] uppercase tracking-[1.2px] font-light rounded-full border ${logoStyle.cls}`}>
+                            {logoStyle.label}
+                          </span>
+                          {hasProduct && (
+                            <span className="inline-flex items-center px-2 py-0.5 text-[8px] sm:text-[9px] uppercase tracking-[1.2px] font-light rounded-full border bg-[#0d7a3e]/10 text-[#0d7a3e] border-[#0d7a3e]/25">
+                              Product Image
                             </span>
-                          </div>
-                          <div className="mt-1.5 flex items-center justify-between">
-                            <span className="text-[10px] font-mono" style={{ color: "rgba(35,16,16,0.35)" }}>
-                              {formatSize(p.fileSize)}
+                          )}
+                          {!hasProduct && (
+                            <span className="inline-flex items-center px-2 py-0.5 text-[8px] sm:text-[9px] uppercase tracking-[1.2px] font-light rounded-full border bg-[#D2A62C]/10 text-[#a88523] border-[#D2A62C]/25">
+                              No Product Image
                             </span>
-                            <a
-                              href={p.heroImage}
-                              download={`${p.slug}.png`}
-                              className="inline-flex items-center gap-1 px-2 py-0.5 text-[8px] uppercase tracking-[1.2px] font-light rounded-full border"
-                              style={{ color: "rgba(35,16,16,0.5)", borderColor: "rgba(35,16,16,0.12)" }}
-                            >
-                              <DownloadIcon />
-                              Download
-                            </a>
-                          </div>
+                          )}
                         </div>
                       </div>
 
-                      {/* Desktop: row layout */}
-                      <div className="hidden sm:flex sm:flex-row">
+                      {/* Two image columns */}
+                      <div className="grid grid-cols-2 gap-px" style={{ background: "rgba(35,16,16,0.06)" }}>
+                        {/* Logo */}
                         <button
-                          onClick={() => setPreview(p)}
-                          className="w-[180px] min-h-[120px] relative shrink-0 cursor-pointer"
-                          style={{ background: "rgba(35,16,16,0.03)" }}
+                          onClick={() => setPreview({ src: p.logo, name: p.navName, slug: p.slug, label: "Brand Logo", size: p.logoSize })}
+                          className="relative aspect-[3/2] cursor-pointer"
+                          style={{ background: "#fbfcff" }}
                         >
-                          <Image
-                            src={p.heroImage}
-                            alt={p.title}
-                            fill
-                            sizes="180px"
-                            className="object-cover"
-                          />
+                          <Image src={p.logo} alt={`${p.navName} logo`} fill sizes="(max-width: 640px) 50vw, 300px" className="object-contain p-4 sm:p-6" />
                         </button>
 
-                        <div className="flex-1 p-4 flex flex-row items-center gap-3">
-                          <div className="flex-1 min-w-0">
-                            <div className="font-light text-[15px] tracking-tight" style={{ color: "#231010" }}>
-                              {p.navName}
-                            </div>
-                            <div className="mt-1.5 flex items-center gap-3 text-[11px] font-mono" style={{ color: "rgba(35,16,16,0.35)" }}>
-                              <span className="truncate">{p.heroImage}</span>
-                              <span className="shrink-0">{formatSize(p.fileSize)}</span>
-                            </div>
+                        {/* Product Image */}
+                        {hasProduct ? (
+                          <button
+                            onClick={() => setPreview({ src: p.productImage!, name: p.navName, slug: p.slug, label: "Product Image", size: p.productImageSize })}
+                            className="relative aspect-[3/2] cursor-pointer"
+                            style={{ background: "#fbfcff" }}
+                          >
+                            <Image src={p.productImage!} alt={`${p.navName} product`} fill sizes="(max-width: 640px) 50vw, 300px" className="object-contain p-4 sm:p-6" />
+                          </button>
+                        ) : (
+                          <div className="relative aspect-[3/2] flex items-center justify-center" style={{ background: "#fbfcff" }}>
+                            <span className="text-[10px] uppercase tracking-[2px] font-light" style={{ color: "rgba(35,16,16,0.15)" }}>Needed</span>
                           </div>
+                        )}
+                      </div>
 
-                          <div className="flex flex-wrap items-center gap-2 shrink-0">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 text-[9px] uppercase tracking-[1.5px] font-light rounded-full border ${imgStyle.color}`}>
-                              {imgStyle.label}
-                            </span>
+                      {/* Download row */}
+                      <div className="px-4 py-2 flex items-center justify-between" style={{ borderTop: "1px solid rgba(35,16,16,0.06)" }}>
+                        <span className="text-[10px] font-mono" style={{ color: "rgba(35,16,16,0.35)" }}>
+                          {formatSize(p.logoSize)}{hasProduct ? ` / ${formatSize(p.productImageSize)}` : ""}
+                        </span>
+                        <div className="flex gap-2">
+                          <a
+                            href={p.logo}
+                            download={`${p.slug}-logo.png`}
+                            className="inline-flex items-center gap-1 px-2 py-0.5 text-[8px] sm:text-[9px] uppercase tracking-[1.2px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]"
+                            style={{ color: "rgba(35,16,16,0.5)", borderColor: "rgba(35,16,16,0.12)" }}
+                          >
+                            <DownloadIcon /> Logo
+                          </a>
+                          {hasProduct && (
                             <a
-                              href={p.heroImage}
-                              download={`${p.slug}.png`}
-                              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[9px] uppercase tracking-[1.5px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]"
+                              href={p.productImage!}
+                              download={`${p.slug}-product.png`}
+                              className="inline-flex items-center gap-1 px-2 py-0.5 text-[8px] sm:text-[9px] uppercase tracking-[1.2px] font-light rounded-full border transition-colors hover:border-[rgba(35,16,16,0.3)] hover:text-[#231010]"
                               style={{ color: "rgba(35,16,16,0.5)", borderColor: "rgba(35,16,16,0.12)" }}
                             >
-                              <DownloadIcon />
-                              Download
+                              <DownloadIcon /> Product
                             </a>
-                          </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -213,30 +199,37 @@ export default function ImageAuditPage() {
           )
         })}
 
-        {/* Action Items */}
-        {needsWork > 0 && (
-          <div className="mt-10 sm:mt-14 rounded-[12px] border p-4 sm:p-6" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}>
-            <h2 className="font-light text-[18px] sm:text-[20px] tracking-tight mb-4 sm:mb-5" style={{ color: "#231010" }}>
-              Needs Attention
-            </h2>
-            <div className="space-y-2">
-              {PRODUCTS.filter(p => classifyImage(p.heroImage, p.slug) !== "real").map(p => {
-                const divColor = DIVISIONS.find(d => d.key === p.division)?.color || "#231010"
-                return (
-                  <div key={p.slug} className="flex items-center gap-2">
-                    <div className="rounded-full shrink-0" style={{ width: 5, height: 5, background: divColor }} />
-                    <span className="text-[12px] font-light" style={{ color: "rgba(35,16,16,0.65)" }}>
-                      {p.navName}
-                    </span>
-                    <span className="text-[10px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>
-                      {classifyImage(p.heroImage, p.slug) === "needs-review" ? "Needs Review" : classifyImage(p.heroImage, p.slug) === "placeholder" ? "No Logo" : "Missing"}
-                    </span>
-                  </div>
-                )
-              })}
+        {/* Needs Attention */}
+        {(() => {
+          const missing = PRODUCTS.filter(p => classifyLogo(p.slug, p.logo) !== "real" || !p.productImage)
+          if (!missing.length) return null
+          return (
+            <div className="mt-10 sm:mt-14 rounded-[12px] border p-4 sm:p-6" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}>
+              <h2 className="font-light text-[18px] sm:text-[20px] tracking-tight mb-4 sm:mb-5" style={{ color: "#231010" }}>
+                Needs Attention
+              </h2>
+              <div className="space-y-2">
+                {missing.map(p => {
+                  const divColor = DIVISIONS.find(d => d.key === p.division)?.color || "#231010"
+                  const issues: string[] = []
+                  if (classifyLogo(p.slug, p.logo) !== "real") issues.push("No Logo")
+                  if (!p.productImage) issues.push("No Product Image")
+                  return (
+                    <div key={p.slug} className="flex items-center gap-2">
+                      <div className="rounded-full shrink-0" style={{ width: 5, height: 5, background: divColor }} />
+                      <span className="text-[12px] font-light" style={{ color: "rgba(35,16,16,0.65)" }}>
+                        {p.navName}
+                      </span>
+                      <span className="text-[10px] font-light" style={{ color: "rgba(35,16,16,0.4)" }}>
+                        {issues.join(" + ")}
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        })()}
 
         {/* Footer */}
         <div className="mt-8 sm:mt-10 text-center text-[11px] font-light" style={{ color: "rgba(35,16,16,0.35)" }}>
@@ -244,7 +237,7 @@ export default function ImageAuditPage() {
         </div>
       </div>
 
-      {/* Lightbox Preview */}
+      {/* Lightbox */}
       {preview && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -257,32 +250,24 @@ export default function ImageAuditPage() {
             onClick={e => e.stopPropagation()}
           >
             <div className="relative w-full aspect-square" style={{ background: "rgba(35,16,16,0.03)" }}>
-              <Image
-                src={preview.heroImage}
-                alt={preview.title}
-                fill
-                sizes="(max-width: 640px) 100vw, 512px"
-                className="object-contain p-6"
-                priority
-              />
+              <Image src={preview.src} alt={preview.name} fill sizes="(max-width: 640px) 100vw, 512px" className="object-contain p-6" priority />
             </div>
             <div className="p-4 flex items-center justify-between gap-3">
               <div className="min-w-0">
                 <div className="font-light text-[15px] tracking-tight" style={{ color: "#231010" }}>
-                  {preview.navName}
+                  {preview.name}
                 </div>
                 <div className="text-[11px] font-mono mt-0.5" style={{ color: "rgba(35,16,16,0.35)" }}>
-                  {formatSize(preview.fileSize)}
+                  {preview.label} \u2014 {formatSize(preview.size)}
                 </div>
               </div>
               <a
-                href={preview.heroImage}
-                download={`${preview.slug}.png`}
+                href={preview.src}
+                download={`${preview.slug}-${preview.label.toLowerCase().replace(" ", "-")}.png`}
                 className="inline-flex items-center gap-1.5 px-4 py-2 text-[10px] uppercase tracking-[1.5px] font-light rounded-[6px] border shrink-0"
                 style={{ color: "#231010", borderColor: "rgba(35,16,16,0.15)", background: "rgba(35,16,16,0.04)" }}
               >
-                <DownloadIcon />
-                Download
+                <DownloadIcon /> Download
               </a>
             </div>
             <button
@@ -309,16 +294,5 @@ function DownloadIcon() {
       <polyline points="7 10 12 15 17 10" />
       <line x1="12" y1="15" x2="12" y2="3" />
     </svg>
-  )
-}
-
-function StatCard({ label, value, accent }: { label: string; value: number; accent?: string }) {
-  return (
-    <div className="rounded-[12px] border p-3 sm:p-4" style={{ background: "#fbfcff", borderColor: "rgba(35,16,16,0.08)" }}>
-      <div className="text-[9px] sm:text-[10px] uppercase tracking-[2px] font-light mb-1" style={{ color: "rgba(35,16,16,0.5)" }}>{label}</div>
-      <div className="text-[22px] sm:text-[26px] font-light tracking-tight" style={{ color: accent || "#231010" }}>
-        {value}
-      </div>
-    </div>
   )
 }
