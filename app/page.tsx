@@ -70,10 +70,12 @@ function ImageCell({ src, alt, label, size, slug, onPreview }: {
     )
   }
   return (
-    <div className="relative aspect-[3/2] flex items-center justify-center px-2 text-center m-3 sm:m-5 rounded-[8px]" style={{ background: "rgba(35,16,16,0.06)" }}>
-      <span className="text-[8px] sm:text-[10px] uppercase tracking-[1.5px] sm:tracking-[2px] font-light leading-tight" style={{ color: "rgba(35,16,16,0.25)" }}>
-        {EMPTY_LABELS[label] || "Needed"}
-      </span>
+    <div className="relative aspect-[3/2] w-full p-3 sm:p-5" style={{ background: "#fbfcff" }}>
+      <div className="w-full h-full rounded-[8px] flex items-center justify-center px-2 text-center" style={{ background: "rgba(35,16,16,0.06)" }}>
+        <span className="text-[8px] sm:text-[10px] uppercase tracking-[1.5px] sm:tracking-[2px] font-light leading-tight" style={{ color: "rgba(35,16,16,0.25)" }}>
+          {EMPTY_LABELS[label] || "Needed"}
+        </span>
+      </div>
     </div>
   )
 }
